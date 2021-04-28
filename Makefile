@@ -116,6 +116,12 @@ ifeq ($(CC), clang)
 endif
 endif
 
+ifeq ($(findstring ppc64, $(MACHINE_NAME)), ppc64)
+ifeq ($(findstring xlc, $(CC)), xlc)
+	CFLAGS += -qaltivec
+endif
+endif
+
 LIB_SH := lib$(LIB_NAME).$(LIB_EXT)
 LIB_ST := lib$(LIB_NAME).a
 
