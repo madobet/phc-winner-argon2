@@ -38,6 +38,10 @@ static uint64_t rdtsc(void) {
     uint64_t rax;
     __asm__ __volatile__("rdtsc" : "=A"(rax) : :);
     return rax;
+#elif defined(__powerpc64__) || defined(__ppc64__)
+    uint64_t tb;
+    __asm__ __volatile__("mfspr %0, 268" : "=r" (tb));
+    return tb;
 #else
 #error "Not implemented!"
 #endif
